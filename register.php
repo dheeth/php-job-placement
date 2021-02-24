@@ -8,23 +8,65 @@
   <title>PHP-MySQL Connection</title>
 </head>
 <body>
-  <!-- Navbar section below -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">MySQLi</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+  <?php
+  include 'header.php';
+  ?>
+  <!-- PHP Code below -->
+  <?php
+
+    // Connecting to Database
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+
+    // Create a Connection
+    $conn = mysqli_connect($servername, $username, $password);
+    if (!$conn) {
+      die('<div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>Error!</strong> Connection Failed. ' . mysqli_connect_error() .
+      '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>');
+    }
+    else{
+      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success!</strong>Connection Successful.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="register.php">Registration</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  </div>';
+    }
+
+  // Create a Database
+  $sql = "CREATE DATABASE phptest";
+  $result = mysqli_query($conn, $sql); // Execute the Query
+  // echo var_dump($result); // Will print true or false based on query executed or not
+
+  // Check for Database Creation Success
+  if ($result) {
+    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success!</strong>Database Created.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>';
+  }
+  else {
+    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>Error!</strong> Database Creation Failed. ' . mysqli_error($conn) .
+      '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>';
+  }
+
+  // Create a Table in our Database
+  $database = "phptest"; // Specified database here so that we can directly run our queries in this one
+  $conn = mysqli_connect($servername, $username, $password, $database);
+  
+
+  ?>
   <!-- Registeration Section below -->
   <div class="container">
   <form class="mt-5">

@@ -8,33 +8,32 @@
   <title>PHP-MySQL Connection</title>
 </head>
 <body>
-  <!-- Navbar section below -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">MySQLi</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+  <?php
+  include 'header.php';
+  ?>  
+  <!-- PHP Code Below -->
+  <?php
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success!</strong> Your email ' . $email . ' and Password ' . $password . ' have been submitted successfully.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="register.php">Registration</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  </div>';
+  }
+  ?>
   <!-- Login Section below -->
   <div class="container">
-  <form class="mt-5">
+  <form action="index.php" method="post" class="mt-5">
     <div class="form-group">
       <label for="email">Email address</label>
-      <input type="email" class="form-control" id="email">
+      <input type="email" name="email" class="form-control" id="email">
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="password" class="form-control" id="password">
+      <input type="password" name="password" class="form-control" id="password">
     </div>
   <button type="submit" class="btn btn-primary">Submit</button>
   </form>
